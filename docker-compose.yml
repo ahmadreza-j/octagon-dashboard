@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  minimal-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: minimal-dashboard
+    restart: unless-stopped
+    ports:
+      - "3030:80"
+    networks:
+      - god-network
+
+    # ── Traefik labels (uncomment when you want to serve via domain) ──
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.minimal-dashboard.rule=Host(`dashboard.yourdomain.com`)"
+    #   - "traefik.http.routers.minimal-dashboard.entrypoints=web"
+    #   - "traefik.http.services.minimal-dashboard.loadbalancer.server.port=80"
+
+networks:
+  god-network:
+    external: true
