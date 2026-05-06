@@ -6,18 +6,14 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: minimal-dashboard
-    restart: unless-stopped
-    ports:
-      - "3030:80"
+    restart: always
     networks:
       - god-network
-
-    # ── Traefik labels (uncomment when you want to serve via domain) ──
-    # labels:
-    #   - "traefik.enable=true"
-    #   - "traefik.http.routers.minimal-dashboard.rule=Host(`dashboard.yourdomain.com`)"
-    #   - "traefik.http.routers.minimal-dashboard.entrypoints=web"
-    #   - "traefik.http.services.minimal-dashboard.loadbalancer.server.port=80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.minimal-dashboard.rule=Host(`octademo.optoplus.ir`)"
+      - "traefik.http.routers.minimal-dashboard.entrypoints=web"
+      - "traefik.http.services.minimal-dashboard.loadbalancer.server.port=80"
 
 networks:
   god-network:
